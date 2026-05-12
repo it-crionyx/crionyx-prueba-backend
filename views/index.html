@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crionyx - Gestión de Retenciones</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 40px; background-color: #f8f9fa; }
+        .container { max-width: 900px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h2 { color: #333; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 12px; border-bottom: 1px solid #ddd; text-align: left; }
+        th { background-color: #007bff; color: white; }
+        
+        /* Estilo condicional solicitado */
+        .aplica-retencion {
+            background-color: #d4edda !important; /* Verde suave */
+            color: #155724;
+            font-weight: bold;
+        }
+        .badge {
+            padding: 5px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+        }
+        .badge-si { background-color: #28a745; color: white; }
+        .badge-no { background-color: #6c757d; color: white; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>🚀 Control de Retenciones Crionyx</h2>
+    <table id="tabla-documentos">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Proveedor</th>
+                <th>Valor Total</th>
+                <th>Retención</th>
+            </tr>
+        </thead>
+        <tbody id="lista-cuerpo">
+            <!-- Los datos se cargarán aquí -->
+        </tbody>
+    </table>
+</div>
+
+<script>
+    // Consumir nuestra API
+    async function cargarDocumentos() {
+        try {
+            // Ajusta la ruta según tu estructura (en este caso subimos un nivel para llegar a index.php)
+            const response = await fetch('../index.php?action=listar');
+            const documentos = await response.json();
+            
+            const tbody = document.getElementById('lista-cuerpo');
+            tbody.innerHTML = ''; // Limpiar tabla
+
+            documentos.forEach(doc => {
+                const fila = document.createElement('tr');
+                
+                // Aplicar clase condicional si aplica_retencion es true
+                if (doc.aplica_retencion) {
+                    fila.classList.add('aplica-retencion');
+                }
+
+                fila.innerHTML = `
+                    <td>${doc.id}</td>
+                    <td>${doc.proveedor}</td>
+                    <td>$${doc.valor_total.toLocaleString('es-CO')}</td>
+                    <td>
+                        <span class="badge ${doc.aplica_retencion ? 'badge-si' : 'badge-no'}">
+                            ${doc.aplica_retencion ? 'APLICA' : 'NO APLICA'}
+                        </span>
+                    </td>
+                `;
+                tbody.appendChild(fila);
+            });
+        } catch (error) {
+            console.error('Error cargando documentos:', error);
+        }
+    }
+
+    // Ejecutar al cargar la página
+    cargarDocumentos();
+</script>
+
+</body>
+</html>
