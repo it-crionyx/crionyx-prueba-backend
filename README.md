@@ -17,9 +17,13 @@ Crionyx está automatizando la gestión de retenciones para documentos contables
 
 ---
 
+## 🧠 Recursividad y Adaptabilidad (Uso de IA)
+El entorno local está configurado para la ejecución nativa de **PHP**. 
+Si tu lenguaje principal es Node.js u otro, **se espera que utilices las herramientas de Inteligencia Artificial permitidas (ChatGPT, Gemini, etc.) como puente de traducción de sintaxis.** En Crionyx valoramos tu capacidad para entender la estructura técnica del problema, el flujo de los datos y cómo se conectan los componentes lógicos a la base de datos, por encima de la memorización de un lenguaje específico. Demuestra tu recursividad resolviendo el requerimiento con el stack proporcionado.
+
 ## 🛠️ Requerimientos Técnicos
 
-### 1. Backend (PHP o Node.js)
+### 1. Backend (PHP)
 * **API REST:** Crea un endpoint `GET /api/documentos` que:
     * Cruce las tablas `documentos`, `proveedores` y `retenciones`.
     * Calcule dinámicamente el valor base en pesos usando la tabla `variables_sistema`.
@@ -46,10 +50,8 @@ El repositorio incluye un archivo `database.sqlite` con la siguiente estructura:
 ---
 
 ## ⚙️ Instrucciones de Entrega (Git Flow)
-1. **Fork/Clone:** Realiza un Fork de este repositorio y clónalo en tu entorno local.
-2. **Branching:** Crea una rama llamada `dev/nombre-apellido` para trabajar.
-3. **Commits:** Realiza commits frecuentes y descriptivos.
-4. **Pull Request:** Al finalizar, sube tu rama y abre un **Pull Request** hacia la rama `main` del repositorio original.
+1. **Branching:** Crea una rama llamada `dev/nombre-apellido` para trabajar.
+2. **Commits:** Realiza commits frecuentes y descriptivos.
 
 ---
 **Nota:** El uso de IA (ChatGPT, etc.) está permitido como herramienta de apoyo, pero la arquitectura y la explicación del código durante la entrevista técnica posterior serán definitivas.

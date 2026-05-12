@@ -1,0 +1,6 @@
+back/node_modules/*
+composer.phar
+database.sqlite
+back/database.sqlite
+
+front/node_modules/*
