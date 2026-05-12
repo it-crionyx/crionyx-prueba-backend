@@ -1,6 +1,4 @@
 <?php
-// models/Documento.php
-
 class Documento {
     private $db;
 
@@ -9,7 +7,6 @@ class Documento {
     }
 
     public function listarConCalculo() {
-        // SQL definitivo con nombres de columnas reales
         $sql = "SELECT 
                     d.id, 
                     p.nombre AS proveedor, 
@@ -22,7 +19,18 @@ class Documento {
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute();
+        return $stmt->fetchAll();
+    }
+
+    public function guardarProcesado($id, $aplica) {
+        // SEGURIDAD: Consulta preparada obligatoria
+        $sql = "INSERT INTO documentos_procesados (documento_id, aplica, fecha_proceso) 
+                VALUES (:id, :aplica, DATETIME('now'))";
         
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+        $stmt->bindParam(':aplica', $aplica, PDO::PARAM_INT);
+        
+        return $stmt->execute();
     }
 }

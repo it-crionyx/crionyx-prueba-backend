@@ -1,36 +1,43 @@
 <?php
-// index.php
 require_once 'config/Database.php';
 require_once 'models/Documento.php';
 
-// Obtener la conexión a la DB
 $db = Database::getConnection();
-
-// Leer la acción de la URL (por ejemplo: index.php?action=listar)
 $action = $_GET['action'] ?? '';
 
-// Definir que la respuesta siempre será JSON para la API
 header('Content-Type: application/json');
 
-if ($action === 'listar') {
-    $modelo = new Documento($db);
-    $datos = $modelo->listarConCalculo();
-    
-    // Procesar la lógica de negocio (UVT) antes de enviar al frontend
-    $resultado = array_map(function($doc) {
-        $baseEnPesos = $doc['base_uvt'] * $doc['uvt_actual'];
+switch ($action) {
+    case 'listar':
+        $modelo = new Documento($db);
+        $datos = $modelo->listarConCalculo();
         
-        return [
-            "id" => $doc['id'],
-            "proveedor" => $doc['proveedor'],
-            "valor_total" => (float)$doc['valor_total'],
-            "aplica_retencion" => $doc['valor_total'] > $baseEnPesos
-        ];
-    }, $datos);
+        $resultado = array_map(function($doc) {
+            $baseEnPesos = $doc['base_uvt'] * $doc['uvt_actual'];
+            return [
+                "id" => $doc['id'],
+                "proveedor" => $doc['proveedor'],
+                "valor_total" => (float)$doc['valor_total'],
+                "aplica_retencion" => $doc['valor_total'] > $baseEnPesos
+            ];
+        }, $datos);
 
-    echo json_encode($resultado);
-    exit;
+        echo json_encode($resultado);
+        break;
+
+    case 'procesar':
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents("php://input"), true);
+            if (isset($input['documento_id'])) {
+                $modelo = new Documento($db);
+                $aplica = $input['aplica_retencion'] ? 1 : 0;
+                $exito = $modelo->guardarProcesado($input['documento_id'], $aplica);
+                echo json_encode(["status" => $exito ? "success" : "error"]);
+            }
+        }
+        break;
+
+    default:
+        echo json_encode(["error" => "Accion no reconocida"]);
+        break;
 }
-
-// Mensaje por defecto si no se reconoce la acción
-echo json_encode(["error" => "Acción no permitida o no especificada"]);
