@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Retenciones - Crionyx</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Gestión de Retenciones</h1>
+            <p class="subtitle">Validación automática de documentos contables basado en UVT</p>
+        </header>
+
+        <main>
+            <div class="actions">
+                <button id="btn-refresh" class="btn-primary">Actualizar Documentos</button>
+                <div id="status-msg" class="status-msg"></div>
+            </div>
+
+            <div class="table-container">
+                <table id="documentos-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Proveedor</th>
+                            <th>Valor Total</th>
+                            <th>Base UVT ($)</th>
+                            <th>Aplica Retención</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="documentos-body">
+                        <!-- Los datos se cargarán aquí -->
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
