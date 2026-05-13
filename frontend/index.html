@@ -211,63 +211,7 @@ cargar();
 
 
 
-//refres page
 
-let loading = false;
-
-async function cargar() {
-  if (loading) return;
-
-  loading = true;
-
-  const tbody = document.getElementById("tabla");
-
-  tbody.innerHTML = `
-    <tr>
-      <td colspan="6" class="loading">Cargando datos...</td>
-    </tr>
-  `;
-
-  try {
-    const res = await fetch(`${CONFIG.API_URL}/api/documentos`);
-    const json = await res.json();
-
-    tbody.innerHTML = "";
-
-    json.data.forEach(doc => {
-      const tr = document.createElement("tr");
-
-      if (doc.aplica_retencion) {
-        tr.classList.add("retencion");
-      }
-
-      tr.innerHTML = `
-        <td>${doc.id}</td>
-        <td>${doc.proveedor}</td>
-        <td>${formatMoney(doc.valor_total)}</td>
-        <td>${doc.base_uvt}</td>
-        <td>${formatMoney(doc.valor_uvt)}</td>
-        <td>
-          <span class="badge ${doc.aplica_retencion ? 'ok' : 'no'}">
-            ${doc.aplica_retencion ? 'SI' : 'NO'}
-          </span>
-        </td>
-      `;
-
-      tbody.appendChild(tr);
-    });
-
-  } catch (error) {
-    tbody.innerHTML = `
-      <tr>
-        <td colspan="6" class="loading">Error cargando datos</td>
-      </tr>
-    `;
-    console.error(error);
-  } finally {
-    loading = false;
-  }
-}
 </script>
 
 </body>
