@@ -46,10 +46,8 @@ El repositorio incluye un archivo `database.sqlite` con la siguiente estructura:
 ---
 
 ## ⚙️ Instrucciones de Entrega (Git Flow)
-1. **Fork/Clone:** Realiza un Fork de este repositorio y clónalo en tu entorno local.
-2. **Branching:** Crea una rama llamada `dev/nombre-apellido` para trabajar.
-3. **Commits:** Realiza commits frecuentes y descriptivos.
-4. **Pull Request:** Al finalizar, sube tu rama y abre un **Pull Request** hacia la rama `main` del repositorio original.
+1. **Branching:** Crea una rama llamada `dev/nombre-apellido` para trabajar.
+2. **Commits:** Realiza commits frecuentes y descriptivos.
 
 ---
 **Nota:** El uso de IA (ChatGPT, etc.) está permitido como herramienta de apoyo, pero la arquitectura y la explicación del código durante la entrevista técnica posterior serán definitivas.
