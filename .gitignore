@@ -1,0 +1,13 @@
+# Ignorar dependencias de Node
+node_modules/
+prueba-back/node_modules/
+prueba-front/node_modules/
+
+# Ignorar archivos de sistema y temporales
+.DS_Store
+Thumbs.db
+dist/
+.env
+
+# Ignorar archivos de base de datos local si no son necesarios
+*.sqlite

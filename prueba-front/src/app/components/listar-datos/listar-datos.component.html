@@ -1,0 +1,6 @@
+<div class="container mt-4">
+    <h3 class="text-center mb-4">Lista datos</h3>
+<app-tabla-documentos [listarDatos]="listarDatos"></app-tabla-documentos>
+<app-insertar-datos (guardar)="guardarNuevoDocumento($event)"></app-insertar-datos>
+
+</div>

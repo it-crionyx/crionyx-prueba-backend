@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover table-striped text-center align-middle">
+      
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Proveedor</th>
+          <th>Valor Total</th>
+          <th>Base UVT</th>
+          <th>Valor Base ($)</th>
+          <th>Retención</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let documento of listarDatos" 
+            [ngClass]="{'table-success': documento.valor_total > (documento.base_uvt * documento.valor_uvt)}">
+          <td>{{ documento.id }}</td>
+          <td>{{ documento.proveedor }}</td>
+          <td>{{ documento.valor_total | currency:'COP':'symbol':'1.0-0' }}</td>
+          <td>{{ documento.base_uvt }}</td>
+          <td>{{ documento.base_uvt * documento.valor_uvt | currency:'COP':'symbol':'1.0-0' }}</td>
+          <td>
+            <span class="badge" 
+                  [ngClass]="{'bg-success': documento.valor_total > (documento.base_uvt * documento.valor_uvt),
+                              'bg-danger': documento.valor_total <= (documento.base_uvt * documento.valor_uvt)}">
+              {{ documento.valor_total > (documento.base_uvt * documento.valor_uvt) ? 'SI' : 'NO' }}
+            </span>
+          </td>
+          <td>{{ documento.fecha | date:'dd/MM/yyyy':'UTC' }}</td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
