@@ -42,9 +42,9 @@ exports.getAllDocumentos = () => {
  */
 exports.procesarDocumento = (data) => {
   const { id_documento, aplica_retencion, valor_base } = data;
-  
+
   return new Promise((resolve, reject) => {
-    db.run(query.queryProcesar, [id_documento, aplica_retencion, valor_base], function(err) {
+    db.run(query.queryProcesar, [id_documento, aplica_retencion, valor_base], function (err) {
       if (err) return reject(err);
       resolve({ id_documento });
     });
