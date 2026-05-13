@@ -27,7 +27,8 @@ exports.getAllDocumentos = () => {
             nombre_proveedor: row.nombre_proveedor,
             valor_total: row.valor_total,
             valor_base_pesos: valorBasePesos,
-            aplica_retencion: aplicaRetencion
+            aplica_retencion: aplicaRetencion,
+            ya_procesado: !!row.ya_procesado
           };
         });
 

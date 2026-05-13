@@ -5,10 +5,12 @@ const queryDocs = `
         d.id, 
         p.nombre AS nombre_proveedor, 
         d.valor_total, 
-        r.base_uvt
+        r.base_uvt,
+        CASE WHEN dp.id_documento IS NOT NULL THEN 1 ELSE 0 END as ya_procesado
       FROM documentos d
       JOIN proveedores p ON d.id_proveedor = p.id
       JOIN retenciones r ON p.id_retencion_aplicable = r.id
+      LEFT JOIN documentos_procesados dp ON d.id = dp.id_documento
     `;
 
 const queryProcesar = `

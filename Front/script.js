@@ -47,8 +47,9 @@ function renderTable(documentos) {
             <td>
                 <button onclick="procesar(${doc.id}, ${doc.aplica_retencion}, ${doc.valor_base_pesos})" 
                         class="btn-secondary" 
-                        id="btn-proc-${doc.id}">
-                    Procesar
+                        id="btn-proc-${doc.id}"
+                        ${doc.ya_procesado ? 'disabled style="background: #dcfce7; border-color: #86efac;"' : ''}>
+                    ${doc.ya_procesado ? 'Listo ✅' : 'Procesar'}
                 </button>
             </td>
         `;
@@ -79,6 +80,15 @@ async function procesar(id, aplica, base) {
         btn.textContent = 'Listo ✅';
         btn.style.background = '#dcfce7';
         btn.style.borderColor = '#86efac';
+
+        // Feedback adicional
+        statusMsg.textContent = `Documento #${id} procesado con éxito`;
+        statusMsg.className = 'status-msg status-success';
+        setTimeout(() => {
+            if (statusMsg.textContent.includes(`Documento #${id}`)) {
+                statusMsg.textContent = 'Datos actualizados';
+            }
+        }, 3000);
     } catch (error) {
         btn.disabled = false;
         btn.textContent = 'Reintentar';
