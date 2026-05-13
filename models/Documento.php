@@ -23,14 +23,18 @@ class Documento {
     }
 
     public function guardarProcesado($id, $aplica) {
-        // SEGURIDAD: Consulta preparada obligatoria
-        $sql = "INSERT INTO documentos_procesados (documento_id, aplica, fecha_proceso) 
-                VALUES (:id, :aplica, DATETIME('now'))";
-        
-        $stmt = $this->db->prepare($sql);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        $stmt->bindParam(':aplica', $aplica, PDO::PARAM_INT);
-        
-        return $stmt->execute();
-    }
+    // Usamos los nombres reales: id_documento y aplica_retencion
+    // Incluimos valor_base como 0 o NULL si no lo estamos calculando aún
+    $sql = "INSERT INTO documentos_procesados (id_documento, aplica_retencion, valor_base) 
+            VALUES (:id, :aplica, :base)";
+    
+    $stmt = $this->db->prepare($sql);
+    
+    // Vinculamos los valores reales
+    $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    $stmt->bindValue(':aplica', $aplica, PDO::PARAM_INT);
+    $stmt->bindValue(':base', 0); // O el valor que desees guardar en valor_base
+    
+    return $stmt->execute();
+}
 }
