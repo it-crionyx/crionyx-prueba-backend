@@ -36,5 +36,5 @@ class Documento {
     $stmt->bindValue(':base', 0); // O el valor que desees guardar en valor_base
     
     return $stmt->execute();
-}
+  }
 }
