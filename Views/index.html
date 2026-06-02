@@ -8,207 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
-    <style>
-        /* ======================================================
-           SISTEMA DE DISEÑO CRIONYX (CSS UNIFICADO)
-        ====================================================== */
-        :root {
-            --bg-main: #0f141c;       /* Fondo oscuro azul-grafito */
-            --bg-card: #161f2b;       /* Fondo de contenedores y tabla */
-            --text-main: #f1f5f9;     /* Texto principal claro */
-            --text-muted: #94a3b8;    /* Texto secundario */
-            --accent: #f59e0b;        /* Ámbar de Crionyx para acentos */
-            --border: #243347;        /* Bordes sutiles de la interfaz */
-            
-            /* REQUISITO: Variables de color para Estilo Condicional */
-            --success-bg: rgba(16, 185, 129, 0.15);   /* Verde suave translúcido */
-            --success-border: #10b981;                /* Borde verde sólido */
-            --success-text: #34d399;                  /* Texto verde brillante */
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            font-family: 'Syne', sans-serif;
-            padding: 2rem;
-            display: flex;
-            justify-content: center;
-        }
-
-        .app-wrapper {
-            width: 100%;
-            max-width: 1200px;
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-
-        /* Cabecera */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
-        }
-        .brand-eyebrow { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; }
-        .brand-title { font-size: 2.5rem; font-weight: 800; }
-        .brand-subtitle { color: var(--text-muted); font-size: 0.9rem; }
-
-        .uvt-badge {
-            background: var(--bg-card);
-            padding: 0.75rem 1.25rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            text-align: right;
-        }
-        .uvt-badge span { display: block; font-size: 0.75rem; color: var(--text-muted); }
-        .uvt-badge strong { font-family: 'DM Mono', monospace; color: var(--accent); }
-
-        /* Métricas */
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1rem;
-        }
-        .metric-card {
-            background: var(--bg-card);
-            padding: 1.25rem;
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        .metric-label { font-size: 0.85rem; color: var(--text-muted); }
-        .metric-value { font-size: 1.8rem; font-weight: 700; font-family: 'DM Mono', monospace; }
-        .metric-value.green { color: var(--success-text); }
-        .metric-value.amber { color: var(--accent); }
-
-        /* Barra de Acciones */
-        .actions-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .section-title { font-size: 1.25rem; font-weight: 600; }
-        .actions-group { display: flex; gap: 0.75rem; }
-
-        .btn {
-            padding: 0.6rem 1.2rem;
-            border-radius: 6px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            font-family: inherit;
-            transition: all 0.2s ease;
-        }
-        .btn-primary { background: var(--accent); color: #000; }
-        .btn-primary:disabled { background: #334155; color: var(--text-muted); cursor: not-allowed; }
-        .btn-secondary { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); }
-        .btn-secondary:hover { background: var(--border); }
-
-        /* Estilos de la Tabla Contenedora */
-        .table-container {
-            background: var(--bg-card);
-            border-radius: 8px;
-            border: 1px solid var(--border);
-            overflow: hidden;
-        }
-        .table-scroll { overflow-x: auto; }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 0.9rem;
-        }
-        th {
-            background: rgba(15, 20, 28, 0.6);
-            padding: 1rem;
-            color: var(--text-muted);
-            font-weight: 600;
-            border-bottom: 1px solid var(--border);
-        }
-        td {
-            padding: 1rem;
-            border-bottom: 1px solid var(--border);
-            font-family: 'DM Mono', monospace;
-        }
-
-        /* ======================================================
-           🔥 REQUISITO ESPECÍFICO: ESTILO CONDICIONAL (FILAS VERDES)
-        ====================================================== */
-        tr.aplica {
-            background-color: var(--success-bg) !important;
-        }
-        tr.aplica td {
-            border-bottom: 1px solid rgba(16, 185, 129, 0.3);
-        }
-
-        /* Etiquetas distintivas (Badges) */
-        .badge-estado {
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: 700;
-        }
-        .badge-estado.aplica { 
-            background: rgba(16, 185, 129, 0.2); 
-            color: var(--success-text); 
-            border: 1px solid var(--success-border); 
-        }
-        .badge-estado.no-aplica { 
-            background: rgba(239, 68, 68, 0.1); 
-            color: #ef4444; 
-            border: 1px solid #ef4444; 
-        }
-
-        .badge-tipo { background: var(--bg-main); padding: 0.25rem 0.5rem; border-radius: 4px; border: 1px solid var(--border); font-size: 0.8rem; }
-        .cell-money { text-align: right; font-weight: 500; }
-        .cell-money.highlight { color: var(--text-main); font-weight: 700; }
-
-        .table-footer {
-            padding: 1rem;
-            background: rgba(15, 20, 28, 0.4);
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            border-top: 1px solid var(--border);
-        }
-
-        /* Checkboxes Personalizados */
-        .checkbox-custom {
-            cursor: pointer;
-            accent-color: var(--accent);
-            width: 16px;
-            height: 16px;
-        }
-
-        #toast {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background: #1e293b;
-            padding: 1rem 1.5rem;
-            border-radius: 6px;
-            border-left: 4px solid var(--accent);
-            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
-            transform: translateY(150%);
-            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            z-index: 1000;
-        }
-        #toast.show { transform: translateY(0); }
-        #toast.success { border-left-color: var(--success-border); }
-        #toast.error { border-left-color: #ef4444; }
-    </style>
+    <link rel="stylesheet" href="/crionyx-prueba-backend/Views/css/index.css">
 </head>
 <body>
 
@@ -219,10 +19,6 @@
             <span class="brand-eyebrow">Sistema de Retenciones v1.0</span>
             <h1 class="brand-title">Crionyx</h1>
             <p class="brand-subtitle">Gestión automatizada de retenciones tributarias</p>
-        </div>
-        <div class="uvt-badge">
-            <span>UVT vigente</span>
-            <strong id="uvt-valor">—</strong>
         </div>
     </header>
 
@@ -276,8 +72,7 @@
                         <th>Estado</th>
                     </tr>
                 </thead>
-                <tbody id="tabla-body">
-                    </tbody>
+                <tbody id="tabla-body"></tbody>
             </table>
         </div>
 
@@ -294,7 +89,6 @@
 
 <script>
     const CONFIG = {
-        // Apunta directamente a la ruta de tu proyecto en Apache/XAMPP
         BASE_URL: 'http://localhost/crionyx-prueba-backend',
         ENDPOINT_GET: '/api/documentos',
         ENDPOINT_POST: '/api/procesar'
@@ -302,11 +96,9 @@
 
     let documentosCargados = [];
 
-    // Cargar documentos desde GET /api/documentos
     async function cargarDocumentos() {
         const tbody = document.getElementById('tabla-body');
         tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:30px; color:var(--text-muted);">Cargando registros desde la base de datos...</td></tr>`;
-        
         document.getElementById('check-all').checked = false;
 
         try {
@@ -321,49 +113,25 @@
 
         } catch (error) {
             console.error("Error original:", error);
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="8" style="text-align:center; padding:25px; color:#ef4444;">
-                        <strong>Error al enlazar la API:</strong> ${error.message}
-                    </td>
-                </tr>
-            `;
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:25px; color:#ef4444;"><strong>Error al enlazar la API:</strong> ${error.message}</td></tr>`;
         }
     }
 
-    // Dibujar las filas aplicando las clases dinámicas de estilos
     function renderizarTabla(datos) {
         const tbody = document.getElementById('tabla-body');
         const footer = document.getElementById('table-footer');
         const footerInfo = document.getElementById('footer-info');
 
         if (datos.length === 0) {
-            tbody.innerHTML = `
-                <tr>
-                    <td colspan="8" style="text-align:center; padding:40px; color:var(--text-muted);">
-                        No hay documentos registrados en este momento.
-                    </td>
-                </tr>
-            `;
+            tbody.innerHTML = `<tr><td colspan="8" style="text-align:center; padding:40px; color:var(--text-muted);">No hay documentos registrados.</td></tr>`;
             return;
         }
 
         tbody.innerHTML = datos.map((doc) => {
-            // Evaluamos si aplica_retencion viene como 1, true o string '1'
             const siAplica = (doc.aplica_retencion == 1 || doc.aplica_retencion === true);
-            
-            // REQUISITO: Asignar clase condicional "aplica" si el registro requiere retención
             const claseFila = siAplica ? 'aplica' : '';
-            
-            // REQUISITO: Asignar etiqueta distintiva (Badge) verde o roja
-            const badgeEstado = siAplica
-                ? `<span class="badge-estado aplica">APLICA</span>`
-                : `<span class="badge-estado no-aplica">NO APLICA</span>`;
-
-            // Habilitar checkbox de selección únicamente si la fila aplica retención
-            const checkboxHtml = siAplica
-                ? `<input type="checkbox" class="checkbox-custom doc-checkbox" data-id="${doc.id_documento}" onchange="actualizarContadorSeleccionados()">`
-                : `<input type="checkbox" class="checkbox-custom" disabled title="No aplica retención">`;
+            const badgeEstado = siAplica ? `<span class="badge-estado aplica">APLICA</span>` : `<span class="badge-estado no-aplica">NO APLICA</span>`;
+            const checkboxHtml = siAplica ? `<input type="checkbox" class="checkbox-custom doc-checkbox" data-id="${doc.id_documento}" onchange="actualizarContadorSeleccionados()">` : `<input type="checkbox" class="checkbox-custom" disabled title="No aplica retención">`;
 
             return `
                 <tr class="${claseFila}">
@@ -384,7 +152,6 @@
         footerInfo.textContent = `${datos.length} documentos cargados · ${aplicanContador} listos para procesamiento`;
     }
 
-    // Calcula los totales en el Frontend al vuelo sin saturar el servidor PHP
     function calcularMetricas(datos) {
         const total = datos.length;
         const aplican = datos.filter(d => d.aplica_retencion == 1).length;
@@ -403,7 +170,6 @@
     function actualizarContadorSeleccionados() {
         const checkboxes = document.querySelectorAll('.doc-checkbox:checked');
         const total = checkboxes.length;
-
         document.getElementById('metric-seleccionados').textContent = total;
         document.getElementById('btn-procesar').disabled = total === 0;
     }
@@ -414,13 +180,11 @@
         actualizarContadorSeleccionados();
     }
 
-    // Persistencia mediante POST /api/procesar
     async function procesarSeleccionados() {
         const checkboxesMarcados = document.querySelectorAll('.doc-checkbox:checked');
         if (checkboxesMarcados.length === 0) return;
 
         const idsSeleccionados = Array.from(checkboxesMarcados).map(cb => parseInt(cb.getAttribute('data-id')));
-
         const documentosAProcesar = documentosCargados
             .filter(doc => idsSeleccionados.includes(parseInt(doc.id_documento)))
             .map(doc => ({
@@ -441,14 +205,12 @@
             });
 
             const data = await respuesta.json();
-
             if (data.success || data.procesados > 0) {
                 mostrarToast(`✓ ${data.procesados || checkboxesMarcados.length} retenciones procesadas e insertadas correctamente.`, 'success');
                 setTimeout(() => cargarDocumentos(), 1200);
             } else {
                 mostrarToast(data.error || 'Error al persistir el lote procesado.', 'error');
             }
-
         } catch (error) {
             mostrarToast(`Error de conexión: ${error.message}`, 'error');
         } finally {
@@ -458,11 +220,7 @@
     }
 
     function formatearPesos(numero) {
-        return new Intl.NumberFormat('es-CO', {
-            style: 'currency',
-            currency: 'COP',
-            minimumFractionDigits: 0
-        }).format(numero);
+        return new Intl.NumberFormat('es-CO', { style: 'currency', currency: 'COP', minimumFractionDigits: 0 }).format(numero);
     }
 
     function mostrarToast(mensaje, tipo = 'info') {
@@ -472,11 +230,7 @@
         setTimeout(() => { toast.className = ''; }, 4000);
     }
 
-    // Inicialización automática
-    document.addEventListener('DOMContentLoaded', () => {
-        cargarDocumentos();
-    });
+    document.addEventListener('DOMContentLoaded', () => { cargarDocumentos(); });
 </script>
-
 </body>
 </html>

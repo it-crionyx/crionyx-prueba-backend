@@ -11,6 +11,9 @@ function routeRequest(string $uri, string $method): void
 {
     // 1. Obtener la ruta limpia inicial
     $uriPath = rtrim(parse_url($uri, PHP_URL_PATH), '/');
+    if (strpos($uriPath, '.css') !== false) {
+        return; 
+    }
     $method = strtoupper($method);
 
     // 2. Remover el subdirectorio físico de XAMPP/Apache
