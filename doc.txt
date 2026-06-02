@@ -1,0 +1,23 @@
+Rutas
+GET:
+http://localhost/crionyx-prueba-backend/api/documentos
+POST:
+http://localhost/crionyx-prueba-backend/api/procesar
+
+Cuerpo formato:
+{
+    "documentos": [
+        {
+            "id_documento": 1,
+            "aplica_retencion": 1,
+            "base_pesos": 450000
+        },
+        {
+            "id_documento": 4,
+            "aplica_retencion": 1,
+            "base_pesos": 850000
+        }
+    ]
+}
+FRONT:
+http://localhost/crionyx-prueba-backend/
