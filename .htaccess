@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Si la petición es hacia un archivo o carpeta real que sí existe, la deja pasar directamente
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Si no existe físicamente (como /api/documentos), redirige todo a index.php manteniendo los parámetros
+RewriteRule ^(.*)$ index.php [QSA,L]
